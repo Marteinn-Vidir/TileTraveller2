@@ -1,3 +1,4 @@
+import random
 # Constants
 NORTH = 'n'
 EAST = 'e'
@@ -57,12 +58,14 @@ def find_directions(col, row):
         valid_directions = SOUTH+WEST
     return valid_directions
 
-def play_one_move(col, row, valid_directions, coins_counter):
+def play_one_move(col, row, valid_directions, coins_counter, moves):
     ''' Plays one move of the game
         Return if victory has been obtained and updated col,row '''
     victory = False
-    direction = input("Direction: ")
+    direction = random.choice([NORTH, EAST, SOUTH, WEST])
     direction = direction.lower()
+    moves += 1
+    print('Direction', direction)
     
     if not direction in valid_directions:
         print("Not a valid direction!")
@@ -77,34 +80,36 @@ def play_one_move(col, row, valid_directions, coins_counter):
         elif col == 3 and row == 2:
             coins_counter=win_coins(coins_counter)
         victory = is_victory(col, row)
-    return victory, col, row, coins_counter
+    return victory, col, row, coins_counter, moves
 
 def win_coins(coins_counter):
-    lever=input('Pull a lever (y/n): ')
+    lever = random.choice(['Y', 'N'])
     if lever.upper() == 'Y':
         coins_counter += 1
         print('You received 1 coin, your total is now {}.'.format(str(coins_counter)))
     return coins_counter
 
-def play():
+def play(moves,coins_counter):
 
     # The main program starts here
     victory = False
     row = 1
     col = 1
-    coins_counter = 0
+    input_seed=int(input('Input seed: '))
+    random.seed(input_seed)
 
     while not victory:
         valid_directions = find_directions(col, row)
         print_directions(valid_directions)
-        victory, col, row, coins_counter = play_one_move(col, row, valid_directions, coins_counter)
-    print("Victory! Total coins {}.".format(coins_counter))
+        victory, col, row, coins_counter, moves = play_one_move(col, row, valid_directions, coins_counter, moves)
+    print("Victory! Total coins {}. Moves {}.".format(coins_counter,moves))
 
 program = True
 while program:
-    play()
+    moves=0
+    coins_counter = 0
+    play(moves,coins_counter)
     replay=input('Play again (y/n): ')
     if replay.lower() == 'n':
         program = False
-        
 
