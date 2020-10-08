@@ -65,7 +65,7 @@ def play_one_move(col, row, valid_directions, coins_counter, moves):
     direction = random.choice([NORTH, EAST, SOUTH, WEST])
     direction = direction.lower()
     moves += 1
-    print('Direction', direction)
+    print('Direction:', direction)
     
     if not direction in valid_directions:
         print("Not a valid direction!")
@@ -84,6 +84,7 @@ def play_one_move(col, row, valid_directions, coins_counter, moves):
 
 def win_coins(coins_counter):
     lever = random.choice(['Y', 'N'])
+    print('Pull a lever (y/n): ')
     if lever.upper() == 'Y':
         coins_counter += 1
         print('You received 1 coin, your total is now {}.'.format(str(coins_counter)))
