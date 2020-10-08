@@ -83,9 +83,9 @@ def play_one_move(col, row, valid_directions, coins_counter, moves):
     return victory, col, row, coins_counter, moves
 
 def win_coins(coins_counter):
-    lever = random.choice(['Y', 'N'])
-    print('Pull a lever (y/n): ')
-    if lever.upper() == 'Y':
+    lever = random.choice(['y', 'n'])
+    print('Pull a lever (y/n):',lever)
+    if lever.lower() == 'y':
         coins_counter += 1
         print('You received 1 coin, your total is now {}.'.format(str(coins_counter)))
     return coins_counter
