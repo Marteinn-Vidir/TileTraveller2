@@ -86,14 +86,25 @@ def win_coins(coins_counter):
         print('You received 1 coin, your total is now {}.'.format(str(coins_counter)))
     return coins_counter
 
-# The main program starts here
-victory = False
-row = 1
-col = 1
-coins_counter = 0
+def play():
 
-while not victory:
-    valid_directions = find_directions(col, row)
-    print_directions(valid_directions)
-    victory, col, row, coins_counter = play_one_move(col, row, valid_directions, coins_counter)
-print("Victory! Total coins {}.".format(coins_counter))
+    # The main program starts here
+    victory = False
+    row = 1
+    col = 1
+    coins_counter = 0
+
+    while not victory:
+        valid_directions = find_directions(col, row)
+        print_directions(valid_directions)
+        victory, col, row, coins_counter = play_one_move(col, row, valid_directions, coins_counter)
+    print("Victory! Total coins {}.".format(coins_counter))
+
+program = True
+while program:
+    play()
+    replay=input('Play again (y/n): ')
+    if replay.lower() == 'n':
+        program = False
+        
+
